@@ -1,11 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
 @import "tailwindcss";
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif; /* Switched to Poppins for a modern look */
 }
+
 body {
   display: flex;
   align-items: center;
@@ -13,42 +16,56 @@ body {
   min-height: 100vh;
   width: 100%;
   position: relative;
+  overflow: hidden; /* Prevents scrollbars if image is large */
 }
+
+/* Background Image with Dark Overlay */
 body::before {
   content: "";
   position: absolute;
-  height: 100%;
-  width: 100%;
-  background: url(https://i.postimg.cc/MZ7dYZLS/backgrundimg.webp);
-  background-position: center;
-  background-size: cover;
+  inset: 0; /* Shorthand for top/left/right/bottom: 0 */
+  background: url(https://i.postimg.cc/MZ7dYZLS/backgrundimg.webp) no-repeat
+    center center/cover;
   z-index: -1;
+  filter: brightness(0.6); /* Darkens bg so text pops */
 }
 
 .maincontainer {
   width: 400px;
-  padding: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(7px);
-  border-radius: 8px;
-  display: flex;
-  display: grid;
-}
-form {
+  padding: 40px;
+  /* Premium Glass Effect */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   display: flex;
   flex-direction: column;
 }
+
 form h2 {
   font-size: 2rem;
   color: white;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
+/* Input Styles */
 .input-field {
   position: relative;
-  border-bottom: 2px solid #ccc;
-  margin: 15px 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  margin: 25px 0;
+  transition: border-color 0.3s;
 }
+
+/* Highlight border on focus */
+.input-field:focus-within {
+  border-bottom: 2px solid #fff;
+}
+
 .input-field input {
   width: 100%;
   height: 40px;
@@ -57,73 +74,147 @@ form h2 {
   outline: none;
   color: #fff;
   font-size: 1rem;
+  padding: 0 5px;
 }
 
 .input-field label {
   position: absolute;
   top: 50%;
-  left: 0;
+  left: 5px;
   transform: translateY(-50%);
-  color: #fff;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 1rem;
   pointer-events: none;
-  transition: 0.3s ease-in;
+  transition: 0.3s ease;
 }
 
+/* Floating Label Logic: Moves label up if focused OR if text exists (placeholder trick) */
 .input-field input:focus ~ label,
-.input-field input:valid ~ label {
-  transform: translateY(-120%);
-  font-size: 0.8rem;
-  top: 10px;
+.input-field input:not(:placeholder-shown) ~ label {
+  top: -5px;
+  font-size: 0.85rem;
+  color: #fff;
 }
 
+/* Password Options */
 .password-options {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 25px 0 35px 0;
+  margin: 10px 0 30px 0;
   color: #fff;
+  font-size: 0.9rem;
 }
 
 .password-options label {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
+
 #remember {
   accent-color: #fff;
-}
-.password-options label p {
-  margin-left: 8px;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  cursor: pointer;
 }
 
 .maincontainer a {
-  color: #efefef;
+  color: #fff;
   text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
 }
+
 .maincontainer a:hover {
+  opacity: 0.8;
   text-decoration: underline;
 }
 
+/* Button Styling */
 button {
-  background-color: #fff;
-  color: #000;
+  background: #fff;
+  color: #333;
   font-size: 1rem;
-  font-weight: 600;
-  padding: 12px 20px;
-  border-radius: 3px;
-  border: 2px solid transparent;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 6px;
+  border: none;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 button:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  border-color: #fff;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .account-options {
   text-align: center;
-  margin-top: 30px;
-  color: #fff;
+  margin-top: 25px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.divider span {
+  padding: 0 10px;
+}
+
+/* Button Container */
+.social-login {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+/* Individual Social Buttons */
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1); /* Subtle glass background */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none; /* Override uppercase from main button */
+  letter-spacing: normal;
+}
+
+.social-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific Tweak for GitHub Icon color */
+.github svg {
+  color: white;
 }

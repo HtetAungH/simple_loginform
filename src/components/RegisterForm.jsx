@@ -1,21 +1,21 @@
-/* ...existing code... */
 import React, { useState } from "react";
 import LoginInput from "./LoginInput";
 
-const LoginForm = ({ onSwitchToRegister }) => {
+const RegisterForm = ({ onSwitchToLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
 
-  // 1. State to store user input
+  // State for registration data
   const [formData, setFormData] = useState({
+    fullname: "",
     mail: "",
     password: "",
+    confirmPassword: "",
   });
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  // 2. Function to handle typing
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -24,61 +24,89 @@ const LoginForm = ({ onSwitchToRegister }) => {
     }));
   };
 
-  // 3. Function to handle Submit
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents the page from refreshing
-
-    // Simulate a login process
-    console.log("Form Submitted Successfully!");
-    console.log("Email:", formData.mail);
-    console.log("Password:", formData.password);
-
-    alert(`Logging in with: ${formData.mail}`);
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+    console.log("Registration Data:", formData);
+    alert(`Welcome, ${formData.fullname}! Account created.`);
   };
 
   return (
-    <div className="maincontainer">
-      {/* Attach handleSubmit to the form tag */}
+    <div className="maincontainer" style={{ paddingTop: "20px" }}>
       <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <h2>Create Account</h2>
 
+        {/* 1. Full Name Field */}
+        <LoginInput
+          id="fullname"
+          name="fullname"
+          type="text"
+          label="Full Name"
+          required
+          value={formData.fullname}
+          onChange={handleChange}
+        />
+
+        {/* 2. Email Field */}
         <LoginInput
           id="mail"
           name="mail"
           type="email"
-          label="Enter your email"
+          label="Email Address"
           required
-          // Pass state and handler
           value={formData.mail}
           onChange={handleChange}
         />
 
+        {/* 3. Password Field */}
         <LoginInput
           id="password"
           name="password"
           type={showPassword ? "text" : "password"}
-          label="Enter your password"
+          label="Password"
           required
           isPassword={true}
           showPassword={showPassword}
           onTogglePassword={togglePasswordVisibility}
-          // Pass state and handler
           value={formData.password}
           onChange={handleChange}
         />
 
-        <div className="password-options">
-          <label htmlFor="remember">
-            <input type="checkbox" id="remember" />
-            <p>Remember me</p>
+        {/* 4. Confirm Password Field */}
+        <LoginInput
+          id="confirmPassword"
+          name="confirmPassword"
+          type={showPassword ? "text" : "password"}
+          label="Confirm Password"
+          required
+          isPassword={true}
+          // We hide the toggle icon here to keep UI clean, or you can enable it
+          showPassword={showPassword}
+          value={formData.confirmPassword}
+          onChange={handleChange}
+        />
+
+        {/* Terms and Conditions Checkbox */}
+        <div
+          className="password-options"
+          style={{ marginTop: "10px", marginBottom: "20px" }}
+        >
+          <label htmlFor="terms">
+            <input type="checkbox" id="terms" required />
+            <p style={{ fontSize: "0.85rem" }}>
+              I agree to the Terms & Conditions
+            </p>
           </label>
-          <a href="#">Forgot Password?</a>
         </div>
 
-        <button type="submit">Log In</button>
+        <button type="submit">Sign Up</button>
 
+        {/* Reuse Social Login for consistency */}
         <div className="divider">
-          <span>Or continue with</span>
+          <span>Or sign up with</span>
         </div>
 
         <div className="social-login">
@@ -126,13 +154,14 @@ const LoginForm = ({ onSwitchToRegister }) => {
 
         <div className="account-options">
           <p>
-            Don't have an account?
+            Already have an account?
+            {/* The onClick handler will trigger the switch */}
             <a
               href="#"
-              onClick={onSwitchToRegister}
+              onClick={onSwitchToLogin}
               style={{ marginLeft: "5px", fontWeight: "bold" }}
             >
-              Register
+              Login
             </a>
           </p>
         </div>
@@ -141,4 +170,4 @@ const LoginForm = ({ onSwitchToRegister }) => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
