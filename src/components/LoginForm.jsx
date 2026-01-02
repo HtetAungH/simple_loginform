@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import LoginInput from "./LoginInput";
 
-const LoginForm = ({ onSwitchToRegister }) => {
+const LoginForm = ({ onSwitchToRegister, onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   // 1. State to store user input
@@ -28,12 +28,8 @@ const LoginForm = ({ onSwitchToRegister }) => {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevents the page from refreshing
 
-    // Simulate a login process
-    console.log("Form Submitted Successfully!");
-    console.log("Email:", formData.mail);
-    console.log("Password:", formData.password);
-
-    alert(`Logging in with: ${formData.mail}`);
+    // Call the onLogin handler passed from App.jsx
+    onLogin(formData);
   };
 
   return (
