@@ -28,8 +28,20 @@ const LoginForm = ({ onSwitchToRegister, onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevents the page from refreshing
 
-    // Call the onLogin handler passed from App.jsx
-    onLogin(formData);
+    // --- Customization Start ---
+    // Define the allowed credentials
+    const validEmail = "test@example.com";
+    const validPassword = "password123";
+
+    // Check if the entered credentials match the allowed ones
+    if (formData.mail === validEmail && formData.password === validPassword) {
+      // If they match, call the onLogin handler passed from App.jsx
+      onLogin({ ...formData, fullname: "Test User" }); // Pass user data
+    } else {
+      // If they don't match, show an error message
+      alert("Invalid email or password. Please try again.");
+    }
+    // --- Customization End ---
   };
 
   return (

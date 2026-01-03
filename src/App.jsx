@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
+import LoginForm from "./components/Login/LoginForm";
+import RegisterForm from "./components/Login/RegisterForm";
 // 1. Import your new Dashboard component
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/views/Dashboard";
 
 export default function App() {
   const [currentForm, setCurrentForm] = useState("login");
