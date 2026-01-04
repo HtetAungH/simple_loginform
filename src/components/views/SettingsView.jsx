@@ -21,6 +21,14 @@ const SettingsView = () => {
     borderBottom: "1px solid rgba(255,255,255,0.1)",
   };
 
+  const securityButtonStyle = {
+    padding: "8px 16px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    width: "180px",
+    textAlign: "center",
+  };
+
   return (
     <div
       style={{
@@ -82,12 +90,10 @@ const SettingsView = () => {
           </div>
           <button
             style={{
-              padding: "8px 16px",
+              ...securityButtonStyle,
               background: "rgba(168, 85, 247, 0.1)",
               color: "#a855f7",
               border: "1px solid #a855f7",
-              borderRadius: "6px",
-              cursor: "pointer",
             }}
           >
             Enable
@@ -111,12 +117,10 @@ const SettingsView = () => {
           </div>
           <button
             style={{
-              padding: "8px 16px",
+              ...securityButtonStyle,
               background: "transparent",
               color: "white",
               border: "1px solid rgba(255,255,255,0.2)",
-              borderRadius: "6px",
-              cursor: "pointer",
             }}
           >
             Update
