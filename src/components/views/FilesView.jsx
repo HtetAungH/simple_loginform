@@ -243,9 +243,7 @@ const FilesView = () => {
               <th style={{ padding: "10px", opacity: 0.6 }}>Name</th>
               <th style={{ padding: "10px", opacity: 0.6 }}>Size</th>
               <th style={{ padding: "10px", opacity: 0.6 }}>Date</th>
-              <th style={{ padding: "10px", opacity: 0.6, textAlign: "right" }}>
-                Action
-              </th>
+              <th style={{ padding: "10px", opacity: 0.6 }}>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -286,7 +284,7 @@ const FilesView = () => {
                 <td style={{ padding: "15px 10px", opacity: 0.7 }}>
                   {file.date}
                 </td>
-                <td style={{ padding: "15px 10px", textAlign: "right" }}>
+                <td style={{ padding: "15px 10px", opacity: 0.7 }}>
                   <AiOutlineDelete
                     style={{
                       cursor: "pointer",
